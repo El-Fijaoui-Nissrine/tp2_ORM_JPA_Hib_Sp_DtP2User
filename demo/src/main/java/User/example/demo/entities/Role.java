@@ -1,5 +1,6 @@
 package User.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,9 +19,11 @@ public class Role {
     //pour  nom unique
     @Column(unique = true , length = 20)
     private String roleName;
+    @Column(name = "DESCRIPTION")
     private String desc;
     @ManyToMany(fetch = FetchType.EAGER)
     //@JoinTable(name ="USERS_ROLES" )
     @ToString.Exclude
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<User> users=new ArrayList<>();
 }
